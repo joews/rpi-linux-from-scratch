@@ -38,3 +38,35 @@ load: 2.04  cmd: dd 30918 uninterruptible 0.00u 0.09s
 This tells me i'm getting about 10mb/s. My class 6 SD card is rated for min 6m/s..
 
 Took 3mins overall.
+
+## Installing host system dependencies
+
+`version_check.sh` (http://www.linuxfromscratch.org/lfs/view/stable/prologue/hostreqs.html) shows that several dependencies are missing. To install on Arch:
+
+pacman -Sy
+pacman -S make gcc patch bison
+
+(It is possible to pacman -S base-devel, but I wanted to keep disk usage to a minimum)
+
+I foun I was still missing /usr/lib/libgmp.la, /usr/lib/libmpfr.la and /usr/lib/libmpc.la. I couldn't find packages for these fies (using the handy `pkgfile` utility) so I decided to press ahead without them, as suggested by the LFS docs (either all 3 or 0 should be there).
+
+My arch partition used 589mb (df --si)
+
+[root@alarmpi ~]# df --si
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       1.8G  589M  1.1G  37% /
+devtmpfs         88M     0   88M   0% /dev
+tmpfs           243M     0  243M   0% /dev/shm
+tmpfs           243M  291k  243M   1% /run
+tmpfs           243M     0  243M   0% /sys/fs/cgroup
+tmpfs           243M     0  243M   0% /tmp
+/dev/mmcblk0p1   95M   26M   69M  28% /boot
+tmpfs            49M     0   49M   0% /run/user/0
+
+
+I am on a 4gb SD card, which may be too small, so I mounted a USB stick as an extra storage device for temporary storage during build.
+
+    mkdir -p /mnt/usb
+    mount /dev/sda1 /mnt/usb
+
+
