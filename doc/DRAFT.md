@@ -64,9 +64,14 @@ tmpfs           243M     0  243M   0% /tmp
 tmpfs            49M     0   49M   0% /run/user/0
 
 
-I am on a 4gb SD card, which may be too small, so I mounted a USB stick as an extra storage device for temporary storage during build.
+I wanted to shrink the root partition to make more room for LFS:
+https://gist.github.com/jwhitfieldseed/10671144
 
-    mkdir -p /mnt/usb
-    mount /dev/sda1 /mnt/usb
+Then I did all the installing of gcc, etc
 
+Once I had done this, and made my new partition:
+
+mkfs.ext4 /dev/mmcblk0p6
+mkdir -p /mnt/lfs
+mount -O suid,dev /dev/mmcblk0p6 /mnt/lfs/
 
