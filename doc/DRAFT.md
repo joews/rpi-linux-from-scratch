@@ -75,3 +75,7 @@ mkfs.ext4 /dev/mmcblk0p6
 mkdir -p /mnt/lfs
 mount -O suid,dev /dev/mmcblk0p6 /mnt/lfs/
 
+
+Followed instructions. Learned about target triples, static/dynamic linkers and how to cross-compile a toolchain.
+
+First build, binutils, is the benchmark. It took 50 mins. Next is GCC, which is expected to take 5 times longer.
